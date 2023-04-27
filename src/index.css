@@ -4,3 +4,32 @@ body {
 input:focus {
   outline: none;
 }
+input {
+  padding: 5px;
+  border: 1px solid gray;
+  margin: 7px;
+  width: 67%;
+  height: 26px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: tomato;
+  width: 50%;
+  margin: 3rem auto;
+  padding: 70px 0;
+  position: relative;
+}
+
+td {
+  border: 1px solid tomato;
+  padding: 16px;
+  margin: 8px;
+}
+tr {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  justify-content: center;
+}

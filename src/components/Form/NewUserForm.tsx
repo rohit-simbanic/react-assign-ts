@@ -1,57 +1,86 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
+import { useUserCustomContext } from "../../Context/userContext";
+import { ActionTypeEnum, IUser } from "../../types/Types";
+import { Alert, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const NewUserForm = () => {
-  const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: tomato;
-    width: 50%;
-    margin: 3rem auto;
-    padding: 70px 0;
-    position: relative;
-  `;
-  const Input = styled.input`
-    padding: 5px;
-    border: 1px solid gray;
-    margin: 7px;
-    width: 67%;
-    height: 26px;
-  `;
+  const { dispatch, activeUsers } = useUserCustomContext();
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [showMsg, setShowMessage] = useState<boolean>(false);
 
+  // redirect
+  const navigate = useNavigate();
+
+  // function goes here
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUsers((prev) => {
+      return { ...prev, id: "", [name]: value };
+    });
+  };
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch({ type: ActionTypeEnum.Add, users });
+    setShowMessage(true);
+  };
+
+  // remove alert after 1 second
+  useEffect(() => {
+    if (showMsg) {
+      setTimeout(() => {
+        setShowMessage(false);
+        navigate("/dashboard");
+      }, 2000);
+    }
+  }, [showMsg]);
+  console.log(users);
   return (
-    <Form>
-      <Input
-        type="text"
-        name="username"
-        autoComplete="off"
-        required
-        placeholder="User Name"
-        minLength={5}
-        maxLength={15}
-      />
-      <Input
-        type="email"
-        name="email"
-        autoComplete="off"
-        pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
-        required
-        placeholder="Email"
-      />
-      <Input
-        type="tel"
-        name="phone"
-        autoComplete="off"
-        required
-        pattern="[7-9]{1}[0-9]{9}"
-        placeholder="Mobile Number"
-      />
-      <Button type="submit" variant="contained">
-        Create User
-      </Button>
-    </Form>
+    <>
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          name="username"
+          autoComplete="on"
+          onChange={handleChange}
+          required
+          placeholder="User Name"
+          minLength={5}
+          maxLength={15}
+        />
+        <input
+          type="email"
+          name="email"
+          onChange={handleChange}
+          autoComplete="off"
+          pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+          required
+          placeholder="Email"
+        />
+        <input
+          type="tel"
+          name="phone"
+          autoComplete="off"
+          onChange={handleChange}
+          required
+          pattern="[7-9]{1}[0-9]{9}"
+          placeholder="Mobile Number"
+        />
+        <Button type="submit" variant="contained">
+          Create User
+        </Button>
+      </form>
+      <Box sx={{ width: "50%", margin: "3rem auto" }}>
+        {showMsg && (
+          <Alert severity="success">
+            Success!! You have created a new user!
+          </Alert>
+        )}
+      </Box>
+    </>
   );
 };
 
