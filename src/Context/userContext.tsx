@@ -17,10 +17,9 @@ export type UserProviderProps = {
 };
 // reducer
 const reducer = (state: IUserState, action: IReducerAction) => {
-  console.log(state);
-  console.log(action);
+  //   console.log(state);
+  //   console.log(action);
   let activeUsers: IUser[];
-  let index;
   switch (action.type) {
     case ActionTypeEnum.Add:
       const { users } = action;
@@ -28,7 +27,7 @@ const reducer = (state: IUserState, action: IReducerAction) => {
       return { ...state, activeUsers: [action.users, ...state.activeUsers] };
 
     case ActionTypeEnum.Delete:
-      const activeUsers = state.activeUsers;
+      activeUsers = state.activeUsers;
       const filteredTask = activeUsers.filter(
         (item) => item.id !== action.users.id
       );
