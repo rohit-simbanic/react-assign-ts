@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { useUserCustomContext } from "../Context/userContext";
 import { ActionTypeEnum } from "../types/Types";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { dispatch, activeUsers } = useUserCustomContext();
@@ -47,6 +48,8 @@ const Dashboard = () => {
       dispatch({ type: ActionTypeEnum.Delete, users: { id } });
     }
   };
+  // redirect
+  const navigate = useNavigate();
   return (
     <Container maxWidth="lg">
       <Box>
@@ -79,7 +82,9 @@ const Dashboard = () => {
                           <DeleteIcon onClick={() => onTaskDelete(item.id)} />
                         </ButtonItem>{" "}
                         <ButtonItem>
-                          <EditIcon />
+                          <EditIcon
+                            onClick={() => navigate(`/edit/${item.id}`)}
+                          />
                         </ButtonItem>
                       </Stack>
                     </Stack>

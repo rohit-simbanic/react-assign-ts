@@ -21,11 +21,12 @@ const reducer = (state: IUserState, action: IReducerAction) => {
   //   console.log(action);
   let activeUsers: IUser[];
   switch (action.type) {
+    // add action case
     case ActionTypeEnum.Add:
       const { users } = action;
       users.id = uuidv4().slice(0, 4);
       return { ...state, activeUsers: [action.users, ...state.activeUsers] };
-
+    // delete action case
     case ActionTypeEnum.Delete:
       activeUsers = state.activeUsers;
       const filteredTask = activeUsers.filter(
