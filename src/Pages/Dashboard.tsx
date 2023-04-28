@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { dispatch, activeUsers } = useUserCustomContext();
+
   const Button = styled.button`
     padding: 9px 22px;
     border-radius: 0;
@@ -48,15 +49,19 @@ const Dashboard = () => {
       dispatch({ type: ActionTypeEnum.Delete, users: { id } });
     }
   };
-  // redirect
+  // redirect function and setUserId state
   const navigate = useNavigate();
+
+  const editFunc = (id: string) => {
+    navigate(`/edit/${id}`);
+  };
   return (
     <Container maxWidth="lg">
       <Box>
         <h2>User Database:</h2>
 
         <h2>
-          <Link to="/addUser">
+          <Link to="/addUser" style={{ textDecoration: "none" }}>
             <Button style={{ cursor: "pointer" }}>
               <ModeEditIcon /> Create a user
             </Button>
@@ -82,9 +87,7 @@ const Dashboard = () => {
                           <DeleteIcon onClick={() => onTaskDelete(item.id)} />
                         </ButtonItem>{" "}
                         <ButtonItem>
-                          <EditIcon
-                            onClick={() => navigate(`/edit/${item.id}`)}
-                          />
+                          <EditIcon onClick={() => editFunc(item.id)} />
                         </ButtonItem>
                       </Stack>
                     </Stack>

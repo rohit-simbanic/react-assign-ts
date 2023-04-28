@@ -34,9 +34,9 @@ export interface IDeleteAction {
   users: { id: string };
 }
 
-// export interface IUpdateAction {
-//   type: ActionTypeEnum.Update;
-//   data: ITask;
-// }
+export interface IUpdateAction {
+  type: ActionTypeEnum.Update;
+  data: IUser;
+}
 
-export type IReducerAction = IAddAction | IDeleteAction;
+export type IReducerAction = IAddAction | IDeleteAction | IUpdateAction;

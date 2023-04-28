@@ -33,6 +33,16 @@ const reducer = (state: IUserState, action: IReducerAction) => {
         (item) => item.id !== action.users.id
       );
       return { ...state, activeUsers: filteredTask };
+    // update case
+    case ActionTypeEnum.Update:
+      activeUsers = state.activeUsers;
+      console.log(action);
+      let index = activeUsers.findIndex((x) => x.id === action.data.id);
+      if (index >= 0) {
+        activeUsers[index] = action.data;
+      }
+      console.log(activeUsers, action.data);
+      return { activeUsers };
   }
   return { ...state };
 };
