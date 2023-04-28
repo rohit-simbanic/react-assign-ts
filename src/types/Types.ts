@@ -40,3 +40,24 @@ export interface IUpdateAction {
 }
 
 export type IReducerAction = IAddAction | IDeleteAction | IUpdateAction;
+
+// Auth types
+
+export interface IAuthContext {
+  activeAuth: IAuth[];
+  setAuth: React.Dispatch<React.SetStateAction<IAuth[]>>;
+  dispatch: Dispatch<any>;
+}
+
+export type IAuth = {
+  auth: string;
+};
+
+export type IAuthState = {
+  activeAuth: IAuth[];
+};
+
+export enum AuthActionTypeEnum {
+  LOGIN,
+  LOGOUT,
+}
