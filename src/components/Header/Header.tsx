@@ -2,25 +2,40 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import Button from "@mui/material/Button";
-
+import { useAuthCustomContext } from "../../Context/AuthContextAPI";
+import { AuthActionTypeEnum, IAuth } from "../../types/Types";
+const Head = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: aqua;
+  padding: 12px 12px;
+  font-size: 18px;
+`;
+const Logo = styled.div`
+  font-size: large;
+  font-weight: bold;
+`;
+const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
 const Header = () => {
-  const Head = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: aqua;
-    padding: 12px 12px;
-    font-size: 18px;
-  `;
-  const Logo = styled.div`
-    font-size: large;
-    font-weight: bold;
-  `;
-  const Menu = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  `;
+  const { dispatch, activeAuth } = useAuthCustomContext();
+  console.log(activeAuth);
+
+  // const loggedIn = activeAuth.find((status) => status);
+  // console.log(loggedIn);
+  // data: string = "false";
+
+  function logOut() {
+    const data: IAuth = {
+      auth: "false",
+    };
+    dispatch({ type: AuthActionTypeEnum.LOGOUT, data });
+    // console.log(data);
+  }
   return (
     <Head>
       <Logo>React</Logo>
@@ -28,16 +43,21 @@ const Header = () => {
         <Link to="/" style={{ textDecoration: "none", marginRight: "10px" }}>
           Home
         </Link>
+        {activeAuth[0].auth === "true" && (
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+            Dashboard
+          </Link>
+        )}
 
-        <Link to="/dashboard" style={{ textDecoration: "none" }}>
-          Dashboard
-        </Link>
-
-        <Link to="/login" style={{ textDecoration: "none" }}>
-          Login
-        </Link>
-
-        <Button variant="contained">Logout</Button>
+        {activeAuth[0].auth === "true" ? (
+          <Button variant="contained" onClick={logOut}>
+            Logout
+          </Button>
+        ) : (
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Button variant="contained">Login</Button>
+          </Link>
+        )}
       </Menu>
     </Head>
   );

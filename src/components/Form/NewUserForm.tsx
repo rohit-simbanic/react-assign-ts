@@ -4,11 +4,13 @@ import { useUserCustomContext } from "../../Context/userContext";
 import { ActionTypeEnum, IUser } from "../../types/Types";
 import { Alert, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAuthCustomContext } from "../../Context/AuthContextAPI";
 
 const NewUserForm = () => {
-  const { dispatch, activeUsers } = useUserCustomContext();
+  const { dispatch } = useUserCustomContext();
   const [users, setUsers] = useState<IUser[]>([]);
   const [showMsg, setShowMessage] = useState<boolean>(false);
+  const { activeAuth } = useAuthCustomContext();
 
   // redirect
   const navigate = useNavigate();
@@ -37,7 +39,12 @@ const NewUserForm = () => {
       }, 2000);
     }
   }, [showMsg]);
-  console.log(users);
+  // console.log(users);
+  useEffect(() => {
+    if (activeAuth[0].auth === "false") {
+      navigate("/login");
+    }
+  });
   return (
     <>
       <form onSubmit={submitHandler}>

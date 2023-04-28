@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -10,38 +10,39 @@ import Container from "@mui/material/Container";
 import { useUserCustomContext } from "../Context/userContext";
 import { ActionTypeEnum } from "../types/Types";
 import { useNavigate } from "react-router-dom";
+import { useAuthCustomContext } from "../Context/AuthContextAPI";
 
+const Button = styled.button`
+  padding: 9px 22px;
+  border-radius: 0;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  background: aqua;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+const ButtonItem = styled.button`
+  padding: 4px 8px;
+  border-radius: 0;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background: tomato;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  &:hover : {
+    backgroundcolor: aqua;
+  }
+`;
 const Dashboard = () => {
   const { dispatch, activeUsers } = useUserCustomContext();
-
-  const Button = styled.button`
-    padding: 9px 22px;
-    border-radius: 0;
-    border: none;
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
-    background: aqua;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  `;
-  const ButtonItem = styled.button`
-    padding: 4px 8px;
-    border-radius: 0;
-    border: none;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    background: tomato;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    &:hover : {
-      backgroundcolor: aqua;
-    }
-  `;
+  const { activeAuth } = useAuthCustomContext();
 
   // delete function
   const onTaskDelete = (id: string) => {
@@ -55,6 +56,14 @@ const Dashboard = () => {
   const editFunc = (id: string) => {
     navigate(`/edit/${id}`);
   };
+
+  // redirect to login page if not logged in
+  useEffect(() => {
+    if (activeAuth[0].auth === "false") {
+      navigate("/login");
+    }
+  });
+
   return (
     <Container maxWidth="lg">
       <Box>

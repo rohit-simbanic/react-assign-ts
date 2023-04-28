@@ -5,10 +5,12 @@ import { useUserCustomContext } from "../Context/userContext";
 import { ActionTypeEnum, IUser } from "../types/Types";
 import { useNavigate } from "react-router-dom";
 import { Alert, Box } from "@mui/material";
+import { useAuthCustomContext } from "../Context/AuthContextAPI";
 
 const EditUser = () => {
   const { id } = useParams();
   const { dispatch, activeUsers } = useUserCustomContext();
+  const { activeAuth } = useAuthCustomContext();
   const [showMsg, setShowMessage] = useState<boolean>(false);
 
   const getEditableUser = activeUsers.find((user) => user.id === id);
@@ -18,8 +20,6 @@ const EditUser = () => {
     email: "",
     phone: "",
   });
-  console.log(editUser);
-  console.log(getEditableUser);
 
   // redirect
   const navigate = useNavigate();
@@ -63,6 +63,12 @@ const EditUser = () => {
       }, 2000);
     }
   }, [showMsg]);
+  // redirect to login page if not logged in
+  useEffect(() => {
+    if (activeAuth[0].auth === "false") {
+      navigate("/login");
+    }
+  });
   return (
     <>
       <form onSubmit={handleSubmit}>

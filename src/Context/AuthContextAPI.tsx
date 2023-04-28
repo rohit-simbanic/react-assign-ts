@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 
 import {
   IAuth,
@@ -6,11 +6,9 @@ import {
   AuthActionTypeEnum,
   IAuthContext,
 } from "../types/Types";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const AuthContextAPI = createContext<IAuthContext>({
   activeAuth: [],
-  setAuth: () => {},
   dispatch: () => {},
 });
 export type AuthProviderProps = {
@@ -18,21 +16,23 @@ export type AuthProviderProps = {
 };
 // reducer
 const reducer = (state: IAuthState, action: any) => {
-  console.log(state);
-  console.log(action);
-  let activeAuth: IAuth[];
+  // console.log(state);
+  // console.log(action);
+  // let activeAuth: IAuth[];
   switch (action.type) {
     // add action case
     case AuthActionTypeEnum.LOGIN:
+      return { activeAuth: [action.data] };
 
     // delete action case
     case AuthActionTypeEnum.LOGOUT:
+      return { activeAuth: [action.data] };
   }
   return { ...state };
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [auth, setAuth] = useLocalStorage<IAuth[]>("auth-status", []);
+  const auth: IAuth[] = [{ auth: "false" }];
   const data: IAuthState = { activeAuth: auth };
   const [state, dispatch] = useReducer(reducer, data);
   console.log(state);
@@ -40,7 +40,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     <AuthContextAPI.Provider
       value={{
         activeAuth: state.activeAuth,
-        setAuth,
         dispatch,
       }}
     >
