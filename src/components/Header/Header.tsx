@@ -34,7 +34,6 @@ const Header = () => {
       auth: "false",
     };
     dispatch({ type: AuthActionTypeEnum.LOGOUT, data });
-    // console.log(data);
   }
   return (
     <Head>

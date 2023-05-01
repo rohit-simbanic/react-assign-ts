@@ -56,9 +56,6 @@ const Dashboard = () => {
   const search_parameters = Object.keys(Object.assign({}, ...data));
   const filter_items = [...new Set(data.map((item) => item.username))];
 
-  console.log(data);
-  console.log(filter_items);
-
   function search(items: any) {
     return items.filter(
       (item: any) =>

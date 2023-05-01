@@ -17,8 +17,6 @@ export type UserProviderProps = {
 };
 // reducer
 const reducer = (state: IUserState, action: IReducerAction) => {
-  //   console.log(state);
-  //   console.log(action);
   let activeUsers: IUser[];
   switch (action.type) {
     // add action case
@@ -82,7 +80,7 @@ const AppProvider = ({ children }: UserProviderProps) => {
   ];
   const data: IUserState = { activeUsers: users };
   const [state, dispatch] = useReducer(reducer, data);
-  console.log(state);
+
   return (
     <UserContext.Provider
       value={{

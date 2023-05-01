@@ -36,7 +36,7 @@ const LoginForm = () => {
 
   const [showMsg, setShowMessage] = useState<boolean>(false);
 
-  const { dispatch, activeAuth } = useAuthCustomContext();
+  const { dispatch } = useAuthCustomContext();
 
   const users = [{ username: "rohit_mondal", password: "123456" }];
   const navigate = useNavigate();
@@ -54,9 +54,8 @@ const LoginForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const account = users.find((user) => user.username === formData.username);
-    // console.log(account);
+
     if (account && account.password === formData.password) {
-      // setAuthenticated(true);
       const data = { auth: "true" };
 
       dispatch({ type: AuthActionTypeEnum.LOGIN, data });

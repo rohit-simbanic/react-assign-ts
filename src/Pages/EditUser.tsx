@@ -58,7 +58,7 @@ const EditUser = () => {
     const usersUsername = activeUsers.map((userName) => userName.username);
     const usersEmail = activeUsers.map((userEmail) => userEmail.email);
     const usersPhone = activeUsers.map((userPhone) => userPhone.phone);
-    // console.log(usersUsername);
+
     switch (name) {
       case "username":
         if (value.length <= 4) {
