@@ -5,10 +5,34 @@ import { ActionTypeEnum, IUser } from "../../types/Types";
 import { Alert, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuthCustomContext } from "../../Context/AuthContextAPI";
+import styled from "@emotion/styled";
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: tomato;
+  width: 50%;
+  margin: auto;
+  padding: 70px 0;
+  position: relative;
+`;
+const Input = styled.input`
+  padding: 5px;
+  border: 1px solid gray;
+  margin: 7px;
+  width: 67%;
+  height: 26px;
+`;
 
 const NewUserForm = () => {
   const { dispatch } = useUserCustomContext();
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [users, setUsers] = useState<IUser>({
+    id: "",
+    username: "",
+    email: "",
+    phone: "",
+  });
   const [showMsg, setShowMessage] = useState<boolean>(false);
   const { activeAuth } = useAuthCustomContext();
 
@@ -47,8 +71,8 @@ const NewUserForm = () => {
   });
   return (
     <>
-      <form onSubmit={submitHandler}>
-        <input
+      <Form onSubmit={submitHandler}>
+        <Input
           type="text"
           name="username"
           autoComplete="on"
@@ -57,8 +81,9 @@ const NewUserForm = () => {
           placeholder="User Name"
           minLength={5}
           maxLength={15}
+          value={users.username}
         />
-        <input
+        <Input
           type="email"
           name="email"
           onChange={handleChange}
@@ -66,8 +91,9 @@ const NewUserForm = () => {
           pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
           required
           placeholder="Email"
+          value={users.email}
         />
-        <input
+        <Input
           type="tel"
           name="phone"
           autoComplete="off"
@@ -75,11 +101,12 @@ const NewUserForm = () => {
           required
           pattern="[7-9]{1}[0-9]{9}"
           placeholder="Mobile Number"
+          value={users.phone}
         />
         <Button type="submit" variant="contained">
           Create User
         </Button>
-      </form>
+      </Form>
       <Box sx={{ width: "50%", margin: "3rem auto" }}>
         {showMsg && (
           <Alert severity="success">

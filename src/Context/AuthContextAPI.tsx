@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 import {
   IAuth,
@@ -16,9 +16,6 @@ export type AuthProviderProps = {
 };
 // reducer
 const reducer = (state: IAuthState, action: any) => {
-  // console.log(state);
-  // console.log(action);
-  // let activeAuth: IAuth[];
   switch (action.type) {
     // add action case
     case AuthActionTypeEnum.LOGIN:
