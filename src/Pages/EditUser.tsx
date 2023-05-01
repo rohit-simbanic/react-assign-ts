@@ -49,7 +49,11 @@ const EditUser = () => {
 
   // validator funciton
 
-  const Validators = (e: any, name: string, value: string) => {
+  const Validators = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    name: string,
+    value: string
+  ) => {
     // find specific username, email, phone to compare
     const usersUsername = activeUsers.map((userName) => userName.username);
     const usersEmail = activeUsers.map((userEmail) => userEmail.email);
@@ -57,7 +61,6 @@ const EditUser = () => {
     // console.log(usersUsername);
     switch (name) {
       case "username":
-        console.log(value);
         if (value.length <= 4) {
           setErrors({
             ...errors,
@@ -131,6 +134,9 @@ const EditUser = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (errors.username || errors.email || errors.phone) {
+      return;
+    }
     updateTaskAction();
   };
 
@@ -158,8 +164,6 @@ const EditUser = () => {
           autoComplete="off"
           required
           placeholder="User Name"
-          minLength={5}
-          maxLength={10}
           onChange={handleChange}
           defaultValue={getEditableUser?.username}
         />

@@ -50,7 +50,11 @@ const NewUserForm = () => {
 
   // function goes here
 
-  const Validators = (e: any, name: string, value: string) => {
+  const Validators = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    name: string,
+    value: string
+  ) => {
     // find specific username, email, phone to compare
     const usersUsername = activeUsers.map((userName) => userName.username);
     const usersEmail = activeUsers.map((userEmail) => userEmail.email);
@@ -58,7 +62,6 @@ const NewUserForm = () => {
     // console.log(usersUsername);
     switch (name) {
       case "username":
-        console.log(value);
         if (value.length <= 4) {
           setErrors({
             ...errors,
