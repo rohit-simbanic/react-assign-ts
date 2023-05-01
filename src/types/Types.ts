@@ -60,3 +60,12 @@ export enum AuthActionTypeEnum {
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",
 }
+
+// validation interface
+
+export interface IError {
+  length?(length: any): unknown;
+  username?: string;
+  email?: string;
+  phone?: string;
+}
