@@ -4,7 +4,9 @@ body {
 input:focus {
   outline: none;
 }
-
+.MuiGrid-root.MuiGrid-item {
+  padding-top: 0 !important;
+}
 :root {
   --bg: hsl(0, 0%, 98%);
   --bg-offset: hsl(0, 0%, 100%);

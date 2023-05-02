@@ -11,7 +11,7 @@ import { useUserCustomContext } from "../Context/userContext";
 import { ActionTypeEnum } from "../types/Types";
 import { useNavigate } from "react-router-dom";
 import { useAuthCustomContext } from "../Context/AuthContextAPI";
-import Grid from "@mui/material/Grid";
+import PaginateSearchFilter from "../components/PaginationSearch/PaginateSearchFilter";
 
 const Button = styled.button`
   padding: 9px 22px;
@@ -110,48 +110,12 @@ const Dashboard = () => {
             </Button>
           </Link>
         </h2>
-        <Box>
-          <Grid
-            container
-            spacing={10}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: 0,
-            }}
-          >
-            <Grid item sx={{ paddingTop: "0 px", paddingBottom: "4rem" }}>
-              <label htmlFor="search-form">
-                <input
-                  type="search"
-                  name="search-form"
-                  id="search-form"
-                  className="search-input"
-                  placeholder="Search for..."
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-                <span className="sr-only">Search By Username</span>
-              </label>
-            </Grid>
-            <Grid item sx={{ paddingTop: 0, paddingBottom: "4rem" }}>
-              <div className="select">
-                <select
-                  onChange={(e) => setFilter(e.target.value)}
-                  className="custom-select"
-                  aria-label="Filter Countries By Username"
-                >
-                  <option value="">Filter By Username</option>
-                  {filter_items.map((item) => (
-                    <option value={item}>Filter By {item}</option>
-                  ))}
-                </select>
-                <span className="focus"></span>
-              </div>
-            </Grid>
-          </Grid>
-        </Box>
 
+        <PaginateSearchFilter
+          setQuery={setQuery}
+          setFilter={setFilter}
+          filter_items={filter_items}
+        />
         <div style={{ overflowX: "auto" }}>
           <table>
             <tbody>
