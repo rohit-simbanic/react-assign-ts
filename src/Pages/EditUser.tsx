@@ -167,7 +167,11 @@ const EditUser = () => {
           onChange={handleChange}
           defaultValue={getEditableUser?.username}
         />
-        {errors?.username && <Alert severity="error">{errors.username}</Alert>}
+        {errors?.username && (
+          <Alert severity="error" variant="filled">
+            {errors.username}
+          </Alert>
+        )}
         <input
           type="email"
           name="email"
@@ -178,7 +182,11 @@ const EditUser = () => {
           defaultValue={getEditableUser?.email}
           onChange={handleChange}
         />
-        {errors?.email && <Alert severity="error">{errors.email}</Alert>}
+        {errors?.email && (
+          <Alert severity="error" variant="filled">
+            {errors.email}
+          </Alert>
+        )}
         <input
           type="tel"
           name="phone"
@@ -189,14 +197,20 @@ const EditUser = () => {
           defaultValue={getEditableUser?.phone}
           onChange={handleChange}
         />
-        {errors?.phone && <Alert severity="error">{errors.phone}</Alert>}
+        {errors?.phone && (
+          <Alert severity="error" variant="filled">
+            {errors.phone}
+          </Alert>
+        )}
         <Button type="submit" variant="contained">
           Edit User
         </Button>
       </form>
       <Box sx={{ width: "50%", margin: "3rem auto" }}>
         {showMsg && (
-          <Alert severity="success">Success!! You updated successfully!</Alert>
+          <Alert severity="success" variant="filled">
+            Success!! You updated successfully!
+          </Alert>
         )}
       </Box>
     </>

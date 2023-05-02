@@ -121,7 +121,7 @@ const Dashboard = () => {
               marginTop: 0,
             }}
           >
-            <Grid item sx={{ paddingTop: 0, paddingBottom: "4rem" }}>
+            <Grid item sx={{ paddingTop: "0 px", paddingBottom: "4rem" }}>
               <label htmlFor="search-form">
                 <input
                   type="search"

@@ -169,7 +169,11 @@ const NewUserForm = () => {
           placeholder="User Name"
           value={users.username}
         />
-        {errors?.username && <Alert severity="error">{errors.username}</Alert>}
+        {errors?.username && (
+          <Alert severity="error" variant="filled">
+            {errors.username}
+          </Alert>
+        )}
         <Input
           type="email"
           name="email"
@@ -179,7 +183,11 @@ const NewUserForm = () => {
           placeholder="Email"
           value={users.email}
         />
-        {errors?.email && <Alert severity="error">{errors.email}</Alert>}
+        {errors?.email && (
+          <Alert severity="error" variant="filled">
+            {errors.email}
+          </Alert>
+        )}
         <Input
           type="tel"
           name="phone"
@@ -189,14 +197,18 @@ const NewUserForm = () => {
           placeholder="Mobile Number"
           value={users.phone}
         />
-        {errors?.phone && <Alert severity="error">{errors.phone}</Alert>}
+        {errors?.phone && (
+          <Alert severity="error" variant="filled">
+            {errors.phone}
+          </Alert>
+        )}
         <Button type="submit" variant="contained" sx={{ margin: "1rem 0" }}>
           Create User
         </Button>
       </Form>
       <Box sx={{ width: "50%", margin: "3rem auto" }}>
         {showMsg && (
-          <Alert severity="success">
+          <Alert severity="success" variant="filled">
             Success!! You have created a new user!
           </Alert>
         )}
