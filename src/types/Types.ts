@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import { Dispatch } from "react";
 
 export type IUserDispatch = {
   dispatch: Dispatch<any>;

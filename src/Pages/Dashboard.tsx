@@ -56,6 +56,8 @@ const Dashboard = () => {
   const search_parameters = Object.keys(Object.assign({}, ...data));
   const filter_items = [...new Set(data.map((item) => item.username))];
 
+  // search function
+
   function search(items: any) {
     return items.filter(
       (item: any) =>
@@ -65,6 +67,8 @@ const Dashboard = () => {
         )
     );
   }
+
+  // load more function button
 
   const load_more = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -80,6 +84,8 @@ const Dashboard = () => {
   };
   // redirect function and setUserId state
   const navigate = useNavigate();
+
+  // redirect to single page function
 
   const editFunc = (id: string) => {
     navigate(`/edit/${id}`);
