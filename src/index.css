@@ -25,7 +25,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: tomato;
+  background: aquamarine;
   width: 50%;
   margin: 3rem auto;
   padding: 70px 0;
@@ -148,4 +148,8 @@ button.load {
   border: 1px solid tomato;
   color: black;
   cursor: pointer;
+}
+.error-text {
+  color: red;
+  font-weight: bold;
 }

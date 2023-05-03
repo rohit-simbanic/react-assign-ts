@@ -1,19 +1,13 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { IUser } from "../../types/Types";
 
 type IPaginateProps = {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
-  filter_items: IUser[];
 };
 
-const PaginateSearchFilter = ({
-  setQuery,
-  setFilter,
-  filter_items,
-}: IPaginateProps) => {
+const PaginateSearchFilter = ({ setQuery, setFilter }: IPaginateProps) => {
   return (
     <Box>
       <Grid
@@ -46,24 +40,10 @@ const PaginateSearchFilter = ({
               className="custom-select"
               aria-label="Filter Countries By Username"
             >
-              <option value="">Filter By Username</option>
-              {filter_items.map((item, i) => (
-                <option key={i} value={item.username}>
-                  &gt;&gt; {item.username}
-                </option>
-              ))}
-              <option value="">Filter By Email</option>
-              {filter_items.map((item, i) => (
-                <option key={i} value={item.email}>
-                  &gt;&gt; {item.email}
-                </option>
-              ))}
-              <option value="">Filter By Phone</option>
-              {filter_items.map((item, i) => (
-                <option key={i} value={item.phone}>
-                  &gt;&gt; {item.phone}
-                </option>
-              ))}
+              <option value="">Select a option to Filter</option>
+              <option value="username">Filter By User Name</option>
+              <option value="email">Filter By Email</option>
+              <option value="phone">Filter By Phone</option>
             </select>
             <span className="focus"></span>
           </div>

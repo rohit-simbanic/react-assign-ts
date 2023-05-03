@@ -12,7 +12,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: tomato;
+  background: aquamarine;
   width: 50%;
   margin: 3rem auto;
   padding: 70px 0;
@@ -32,7 +32,7 @@ const NewUserForm = () => {
     email: "",
     phone: "",
   });
-  console.log(errors?.length);
+
   const { dispatch } = useUserCustomContext();
   const { activeUsers } = useUserCustomContext();
   const [users, setUsers] = useState<IUser>({
@@ -169,11 +169,7 @@ const NewUserForm = () => {
           placeholder="User Name"
           value={users.username}
         />
-        {errors?.username && (
-          <Alert severity="error" variant="filled">
-            {errors.username}
-          </Alert>
-        )}
+        {errors?.username && <p className="error-text">{errors.username}</p>}
         <Input
           type="email"
           name="email"
@@ -183,11 +179,7 @@ const NewUserForm = () => {
           placeholder="Email"
           value={users.email}
         />
-        {errors?.email && (
-          <Alert severity="error" variant="filled">
-            {errors.email}
-          </Alert>
-        )}
+        {errors?.email && <p className="error-text">{errors.email}</p>}
         <Input
           type="tel"
           name="phone"
@@ -197,11 +189,7 @@ const NewUserForm = () => {
           placeholder="Mobile Number"
           value={users.phone}
         />
-        {errors?.phone && (
-          <Alert severity="error" variant="filled">
-            {errors.phone}
-          </Alert>
-        )}
+        {errors?.phone && <p className="error-text">{errors.phone}</p>}
         <Button type="submit" variant="contained" sx={{ margin: "1rem 0" }}>
           Create User
         </Button>

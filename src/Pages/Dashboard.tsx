@@ -44,31 +44,24 @@ const ButtonItem = styled.button`
 const Dashboard = () => {
   const { dispatch, activeUsers } = useUserCustomContext();
   const { activeAuth } = useAuthCustomContext();
-
+  const data = Object.values(activeUsers);
   // paginate and searching & sorting state
 
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [paginate, setpaginate] = useState(6);
 
-  const data = Object.values(activeUsers);
-  console.log(data);
+  const search_parameters = !filter
+    ? Object.keys(Object.assign({}, ...data))
+    : [filter];
 
-  const search_parameters = Object.keys(Object.assign({}, ...data));
-  const filter_items = [...new Set(data.map((item) => item))];
-  console.log(filter_items);
-  console.log(filter);
   // search function
 
   function search(items: any) {
-    return items.filter(
-      (item: any) =>
-        (item.username.includes(filter) ||
-          item.email.includes(filter) ||
-          item.phone.includes(filter)) &&
-        search_parameters.some((parameter) =>
-          item[parameter].toString().toLowerCase().includes(query)
-        )
+    return items.filter((item: any) =>
+      search_parameters.some((parameter: any) =>
+        item[parameter].toString().toLowerCase().includes(query)
+      )
     );
   }
 
@@ -115,11 +108,7 @@ const Dashboard = () => {
           </Link>
         </h2>
 
-        <PaginateSearchFilter
-          setQuery={setQuery}
-          setFilter={setFilter}
-          filter_items={filter_items}
-        />
+        <PaginateSearchFilter setQuery={setQuery} setFilter={setFilter} />
         <div style={{ overflowX: "auto" }}>
           <table>
             <tbody>
