@@ -7,7 +7,7 @@ import Dashboard from "./Pages/Dashboard";
 import AddNewUser from "./Pages/AddNewUser";
 import EditUser from "./Pages/EditUser";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Header />
@@ -22,6 +22,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

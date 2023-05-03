@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Button from "@mui/material/Button";
 import { useAuthCustomContext } from "../../Context/AuthContextAPI";
 import { AuthActionTypeEnum, IAuth } from "../../types/Types";
+
 const Head = styled.header`
   display: flex;
   align-items: center;
@@ -23,11 +24,6 @@ const Menu = styled.div`
 `;
 const Header = () => {
   const { dispatch, activeAuth } = useAuthCustomContext();
-  console.log(activeAuth);
-
-  // const loggedIn = activeAuth.find((status) => status);
-  // console.log(loggedIn);
-  // data: string = "false";
 
   function logOut() {
     const data: IAuth = {
@@ -35,6 +31,7 @@ const Header = () => {
     };
     dispatch({ type: AuthActionTypeEnum.LOGOUT, data });
   }
+
   return (
     <Head>
       <Logo>React</Logo>

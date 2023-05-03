@@ -52,16 +52,20 @@ const Dashboard = () => {
   const [paginate, setpaginate] = useState(6);
 
   const data = Object.values(activeUsers);
+  console.log(data);
 
   const search_parameters = Object.keys(Object.assign({}, ...data));
-  const filter_items = [...new Set(data.map((item) => item.username))];
-
+  const filter_items = [...new Set(data.map((item) => item))];
+  console.log(filter_items);
+  console.log(filter);
   // search function
 
   function search(items: any) {
     return items.filter(
       (item: any) =>
-        item.username.includes(filter) &&
+        (item.username.includes(filter) ||
+          item.email.includes(filter) ||
+          item.phone.includes(filter)) &&
         search_parameters.some((parameter) =>
           item[parameter].toString().toLowerCase().includes(query)
         )

@@ -97,7 +97,7 @@ const LoginForm = () => {
       </Form>
       <Box sx={{ width: "50%", margin: "3rem auto" }}>
         {showMsg && (
-          <Alert severity="success">
+          <Alert severity="success" variant="filled">
             Success!! You have logged in successfully!
           </Alert>
         )}
